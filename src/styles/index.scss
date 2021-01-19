@@ -1,0 +1,18 @@
+// scss中以'_'开头的文件，不可以直接编译， 需要被引用，引用时不需要加'_'
+// config 
+@import 'variables';
+
+// layout
+@import 'reboot';
+
+// mixin
+@import 'mixin';
+
+// btn
+@import '../components/Button/style';
+
+//menu
+@import '../components/Menu/style';
+
+// icon
+@import '../components/Icon/style';
