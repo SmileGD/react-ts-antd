@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 
 
-import Button, { ButtonType, ButtonSize } from './components/Button/button';
+import Button from './components/Button/button';
 import Menu from './components/Menu/menu';
 import SubMenu from './components/Menu/subMenu';
 import MenuItem from './components/Menu/menuItem';
 import Icon from './components/Icon/icon';
+import Transition from './components/Transition/transition'
 
 library.add(fas)
 
 function App() {
+  const [show, setShow] = useState(false)
   return (
     <div className="App">
       <Menu defaultIndex='0' onSelect={(index) => { alert(index) }}>
@@ -33,7 +35,7 @@ function App() {
             link c
         </MenuItem>
       </Menu>
-      <Menu defaultIndex='0' mode="vertical" defaultOpenSubMenus={['2']}>
+      <Menu defaultIndex='0' mode="vertical" defaultOpenSubMenus={['1']}>
         <MenuItem>
             link a
         </MenuItem>
@@ -53,12 +55,32 @@ function App() {
         </MenuItem>
       </Menu>
       <Button onClick={(e) => { e.preventDefault(); alert(123)}}>default button</Button>
-      <Button btnType={ButtonType.Primary} size={ButtonSize.Small}>Primary Small</Button>
-      <Button btnType={ButtonType.Danger} size={ButtonSize.Large}>Danger Large</Button>
-      <Button btnType={ButtonType.Danger} size={ButtonSize.Small} disabled>Danger small disabled</Button>
-      <Button btnType={ButtonType.Link} href="www.baidu.com">link</Button>
-      <Button btnType={ButtonType.Link} href="www.baidu.com" disabled>link disabled</Button>
-      <Icon icon="arrow-down" size="2x" theme="danger" />
+      <Button btnType='primary' size='sm'>Primary Small</Button>
+      <Button btnType='danger' size='lg'>Danger Large</Button>
+      <Button btnType='danger' size='sm' disabled>Danger small disabled</Button>
+      <Button btnType='link' href="www.baidu.com">link</Button>
+      <Button btnType='link' href="www.baidu.com" disabled>link disabled</Button>
+      <Icon icon="arrow-down" size="2x" theme="primary" />
+      <Button size='sm' onClick={() => { setShow(!show) }}>toggle</Button>
+      <Transition
+        in={show}
+        timeout={300}
+        animation="zoom-in-left">
+          <div>
+            <p>there is some content here!</p>
+            <p>there is some content here!</p>
+            <p>there is some content here!</p>
+            <p>there is some content here!</p>
+            <p>there is some content here!</p>
+          </div>
+      </Transition>
+      <Transition
+        in={show}
+        timeout={300}
+        wrapper
+        animation="zoom-in-left">
+          <Button btnType='danger' size='lg'>A large primary button</Button>
+      </Transition>
     </div>
   )
 }

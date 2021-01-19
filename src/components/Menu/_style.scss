@@ -38,11 +38,23 @@
         }
     }
 
+    .is-vertical {
+        .arrow-icon {
+            transform: rotate(0deg) !important;
+        }
+    }
+
+    .is-vertical.is-opened {
+        .arrow-icon {
+            transform: rotate(180deg) !important;
+        }
+    }
+
     .wjs-submenu {
         padding-left: 0;
         white-space: nowrap;
         list-style:none;
-        display: none;
+        // display: none;
         .wjs-menu-item {
             padding: $menu-item-padding-y $menu-item-padding-x;
             transition: $menu-transition;
@@ -55,7 +67,7 @@
     }
 
     .wjs-submenu.menu-opened {
-        display: block;
+        // display: block;
     }
 }
 
