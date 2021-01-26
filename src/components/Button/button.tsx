@@ -5,19 +5,48 @@ export type ButtonSize = 'lg' | 'sm'
 
 export type ButtonType = 'primary' | 'default' | 'danger' | 'link'
 interface BaseButtonProps {
+    /**
+     *  用户样式类名
+     */
     className?: string;
+    /**
+     * 是否禁用按钮，默认false
+     */
     disabled?: boolean;
+    /**
+     * 按钮的尺寸大小
+     */
     size?: ButtonSize;
+    /**
+     *  button type 按钮的类型
+     */
     btnType?: ButtonType;
+    /**
+     * 按钮自定义节点
+     */
     children: React.ReactNode;
+    /**
+     * link按钮的链接地址
+     */
     href?: string;
+    /**
+     * 自定义按钮背景色
+     */
+    backgroundColor?: string
+    /**
+     * 自定义文字颜色
+     */
+    color?: string
 }
 
 type NativeButtonProps = BaseButtonProps & React.ButtonHTMLAttributes<HTMLElement>
 type NativeAnchorProps = BaseButtonProps & React.AnchorHTMLAttributes<HTMLElement>
 export type ButtonProps = Partial< NativeButtonProps & NativeAnchorProps >
 
-const Button: React.FC<ButtonProps> = (props) => {
+/**
+ * Primary UI component for user interaction
+ */
+export const Button: React.FC<ButtonProps> = (props) => {
     const {
         className,
         disabled,
@@ -25,6 +54,8 @@ const Button: React.FC<ButtonProps> = (props) => {
         btnType,
         children,
         href,
+        backgroundColor,
+        color,
         ...restProps
     } = props
     // 默认都有btn这个类名， 然后根据type和size和禁用状态来添加类名 如 btn-lg
@@ -40,6 +71,7 @@ const Button: React.FC<ButtonProps> = (props) => {
             <a
                 className={classes}
                 href={href}
+                style={{ color }}
                 {...restProps}>
                 {children}
             </a>
@@ -50,6 +82,7 @@ const Button: React.FC<ButtonProps> = (props) => {
             <button
                 className={classes}
                 disabled={disabled}
+                style={{ color, backgroundColor }}
                 {...restProps}>
                 {children}
             </button>
@@ -59,7 +92,8 @@ const Button: React.FC<ButtonProps> = (props) => {
 
 Button.defaultProps = {
     disabled: false,
-    btnType: 'default'
+    btnType: 'default',
+    size: 'sm'
 }
 
 export default Button

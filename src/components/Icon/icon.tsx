@@ -4,12 +4,14 @@ import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontaw
 
 export type ThemeProps = 'primary' | 'secondary' | 'success'
 | 'info' | 'warning' | 'danger' | 'light' | 'dark'
-
-interface IconProps extends FontAwesomeIconProps {
+export interface IconProps extends FontAwesomeIconProps {
+    /**
+     * icon的主题
+     */
     theme?: ThemeProps
 }
 
-const Icon: React.FC<IconProps> = (props) => {
+export const Icon: React.FC<IconProps> = (props) => {
     const { className, theme, ...restProps } = props
     const classes = classnames('wjs-icon', className, {
         [`icon-${theme}`]: theme
@@ -17,6 +19,10 @@ const Icon: React.FC<IconProps> = (props) => {
     return (
         <FontAwesomeIcon className={classes} {...restProps}></FontAwesomeIcon>
     )
+}
+
+Icon.defaultProps = {
+    size: '1x'
 }
 
 export default Icon
